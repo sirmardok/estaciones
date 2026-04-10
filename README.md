@@ -44,6 +44,19 @@ El archivo secrets.properties en entorno productivo no se almacenaria en el serv
 5. Descargar el proyecto Java carpeta **estaciones** y compilar con maven: **> mvn clean install** genera el JAR /target/estaciones-0.0.1-SNAPSHOT.jar Ejecutar como aplicacion java en localhost:8080
 6. Se deben realizar las pruebas desde postman importando la colección: **postman_collection/estaciones.json**
 
+## Supuestos Realizados
+* Se crean dos roles para usuarios en memoria con los siguientes accesos:
+    - **USER**: Solo acceso a listar estaciones y buscar estación por Id.
+    - **ADMIN**: Acceso a todas las funcionalidades: listar, adicionar, actualizar y eliminar
+* Pruebas: Por efectos de tiempo solo se realizaron pruebas unitarias a la clase servicio: ""EstacionServiceImpl.java""
+* Adicion de estaciones: *No se pueden crear 2 estaciones con el mismo código (Restringido desde BD)*
+* Actualizaciones: No se actualiza el campo "Ciudad" a una estación ya creada
+* Los campos: Código, Nombre, Activa, fecha creación y fecha actualización **NO pueden ser NULL**
+* Los campos de ubicación: Latitud y Longitud se pudieran haber creado como tipo de dato POINT en una sola columna pero se utilizaron 2 columnas con campos de tipo Double.
+* Se crearon entidades Ciudad y Departamento para manejar la relación de estaciones ubicadas en una ciudad y una ciudad asociada a un departamento.
+* No se crean ni se modifican desde el modelo ciudades o departamentos, se usan las creadas y si se va a crear una estación en una ciudad que no existe reporta la excepcion 404 Not Found
+* Las contraseñas de los usuarios se guardan en el **secret.properties** provisionalmente y para efectos de desarrollo
+
 ## Ejecución Aplicación
 ### Ruta ejecución:
 http://localhost:8080/api/estaciones
