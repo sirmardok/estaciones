@@ -49,7 +49,7 @@ public class EstacionServiceImpl implements EstacionService{
     	System.out.println("LOG: Buscando estación " + id + " en MySQL...");
 
         Estacion estacion = estacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Estacion not found with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estación no encontrada con Id:" + id));
 
         return modelMapper.map(estacion, EstacionDto.class);
     }
@@ -71,7 +71,7 @@ public class EstacionServiceImpl implements EstacionService{
    @CacheEvict(value = "estaciones_lista", allEntries = true) // Limpia la lista general
    public EstacionDto updateEstacion(EstacionDto estacionDto, Long id) {
 	   Estacion estacion = estacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Estacion not found with id : " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estación no encontrada con Id: " + id));
          estacion.setCodigo(estacionDto.getCodigo());
          estacion.setNombre(estacionDto.getNombre());
          estacion.setDireccion(estacionDto.getDireccion());         
@@ -91,7 +91,7 @@ public class EstacionServiceImpl implements EstacionService{
     public void deleteEstacion(Long id) {
 
     	Estacion estacion = estacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Estacion not found with id : " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Estación no encontrada con Id: " + id));
 
     	estacionRepository.deleteById(id);
     }

@@ -63,7 +63,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{    \r\n    \"codigo\": \"EDS3366\",\r\n    \"nombre\": \"abcdefghi\",\r\n    \"direccion\": \"Cra 1 2-3\",\r\n    \"ciudadNombre\": \"Bogotá\",\r\n    \"latitud\": 5.45343,\r\n    \"longitud\": 30.45435,\r\n    \"activa\": true\r\n}",
+          "raw": "{    \r\n    \"codigo\": \"EDS3369\",\r\n    \"nombre\": \"abc\",\r\n    \"direccion\": \"Cra 1 2-3\",\r\n    \"ciudadNombre\": \"Bogotá\",\r\n    \"latitud\": 5.45343,\r\n    \"longitud\": 30.45435,\r\n    \"activa\": true\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -107,7 +107,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{    \r\n    \"codigo\": \"EDS333\",\r\n    \"nombre\": \"Nueva Estacion PRUEBA UPDATE 8\",\r\n    \"direccion\": \"Cra 86 71A-42\",    \r\n    \"latitud\": 31.334454,\r\n    \"longitud\": -23.44554,\r\n    \"activa\": false\r\n}",
+          "raw": "{    \r\n    \"codigo\": \"EDS3335\",\r\n    \"nombre\": \"Nueva Estacion PRUEBA UPDATE 10\",\r\n    \"direccion\": \"Cra 86 71A-42\",    \r\n    \"latitud\": 31.334454,\r\n    \"longitud\": -23.44554,\r\n    \"activa\": false\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -115,7 +115,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/estaciones/15",
+          "raw": "http://localhost:8080/api/estaciones/13",
           "protocol": "http",
           "host": [
             "localhost"
@@ -124,7 +124,7 @@
           "path": [
             "api",
             "estaciones",
-            "15"
+            "13"
           ]
         }
       },
@@ -160,7 +160,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/estaciones/15",
+          "raw": "http://localhost:8080/api/estaciones/10",
           "protocol": "http",
           "host": [
             "localhost"
@@ -169,7 +169,7 @@
           "path": [
             "api",
             "estaciones",
-            "15"
+            "10"
           ]
         }
       },
@@ -196,7 +196,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/estaciones/15",
+          "raw": "http://localhost:8080/api/estaciones/13",
           "protocol": "http",
           "host": [
             "localhost"
@@ -205,7 +205,7 @@
           "path": [
             "api",
             "estaciones",
-            "15"
+            "13"
           ]
         }
       },

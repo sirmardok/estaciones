@@ -56,7 +56,7 @@ public class EstacionController {
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteEstacion(@PathVariable("id") Long estacionId){
     	estacionService.deleteEstacion(estacionId);
-        return ResponseEntity.ok("Estacion deleted successfully!.");
+        return ResponseEntity.ok("Estación borrada exitosamente!.");
     }
     
 }
