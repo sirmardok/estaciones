@@ -10,8 +10,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.terpel.estaciones.dto.EstacionDto;
+import com.terpel.estaciones.entity.Ciudad;
 import com.terpel.estaciones.entity.Estacion;
 import com.terpel.estaciones.exception.ResourceNotFoundException;
+import com.terpel.estaciones.repository.CiudadRepository;
 import com.terpel.estaciones.repository.EstacionRepository;
 import com.terpel.estaciones.service.EstacionService;
 
@@ -22,14 +24,19 @@ import lombok.AllArgsConstructor;
 public class EstacionServiceImpl implements EstacionService{
 	
 	private EstacionRepository estacionRepository;
+	private CiudadRepository ciudadRepository;
 
     private ModelMapper modelMapper;
 
-    @Override
-    @CachePut(value = "estaciones", key = "#estacionDto.id")
+    @Override    
     public EstacionDto addEstacion(EstacionDto estacionDto) {
 
-        Estacion estacion = modelMapper.map(estacionDto, Estacion.class);        
+        Estacion estacion = modelMapper.map(estacionDto, Estacion.class);
+        Ciudad ciudad = ciudadRepository.findByNombre(estacionDto.getCiudadNombre())
+        		.orElseThrow(() -> new ResourceNotFoundException("Ciudad no encontrada: " + estacionDto.getCiudadNombre()));
+        
+        estacion.setCiudad(ciudad);
+        
         Estacion newEstacion = estacionRepository.save(estacion);        
         EstacionDto newEstacionDto = modelMapper.map(newEstacion, EstacionDto.class);
 
@@ -38,7 +45,8 @@ public class EstacionServiceImpl implements EstacionService{
 
     @Override
     @Cacheable(value = "estaciones", key = "#id")
-    public EstacionDto getEstacion(Long id) {
+    public EstacionDto getEstacion(Long id) {    	
+    	System.out.println("LOG: Buscando estación " + id + " en MySQL...");
 
         Estacion estacion = estacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estacion not found with id:" + id));
@@ -47,36 +55,39 @@ public class EstacionServiceImpl implements EstacionService{
     }
 
    @Override
-   @Cacheable(value = "estaciones")
+   @Cacheable(value = "estaciones_lista")
     public List<EstacionDto> getAllEstaciones() {
+	   
+	   System.out.println("LOG: Trayendo todas las estaciones de MySQL...");
+	   
+       List<Estacion> estaciones = estacionRepository.findAll();
 
-        List<Estacion> estaciones = estacionRepository.findAll();
-
-        return estaciones.stream().map((estacion) -> modelMapper.map(estacion, EstacionDto.class))
+       return estaciones.stream().map((estacion) -> modelMapper.map(estacion, EstacionDto.class))
                 .collect(Collectors.toList());
     }
 
    @Override
    @CachePut(value = "estaciones", key = "#id")
-    public EstacionDto updateEstacion(EstacionDto estacionDto, Long id) {
-
-         Estacion estacion = estacionRepository.findById(id)
+   @CacheEvict(value = "estaciones_lista", allEntries = true) // Limpia la lista general
+   public EstacionDto updateEstacion(EstacionDto estacionDto, Long id) {
+	   Estacion estacion = estacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estacion not found with id : " + id));
          estacion.setCodigo(estacionDto.getCodigo());
          estacion.setNombre(estacionDto.getNombre());
-         estacion.setDireccion(estacionDto.getDireccion());
-         estacion.setCiudad(estacionDto.getCiudad());
+         estacion.setDireccion(estacionDto.getDireccion());         
          estacion.setLatitud(estacionDto.getLatitud());
          estacion.setLongitud(estacionDto.getLongitud());         
-         estacion.setActiva(estacionDto.isActiva());
+         estacion.setActiva(estacionDto.isActiva());         
+         
+       System.out.println("LOG: Actualizando estacion " + estacion.getId() + " en MySQL y Redis...");
 
-         Estacion updatedEstacion = estacionRepository.save(estacion);
+       Estacion updatedEstacion = estacionRepository.save(estacion);
 
-        return modelMapper.map(updatedEstacion, EstacionDto.class);
+       return modelMapper.map(updatedEstacion, EstacionDto.class);
     }
 
     @Override
-    @CacheEvict(value = "estaciones", key = "#id")
+    @CacheEvict(value = {"estaciones", "estaciones_lista"}, key = "#id", allEntries = false)
     public void deleteEstacion(Long id) {
 
     	Estacion estacion = estacionRepository.findById(id)

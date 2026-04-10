@@ -1,0 +1,251 @@
+{
+  "info": {
+    "_postman_id": "123e4c8e-ebad-445b-9b78-455c8f471a0b",
+    "name": "estaciones",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "4669310"
+  },
+  "item": [
+    {
+      "name": "getEstaciones",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "1234",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/estaciones",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estaciones"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addEstacion",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "admin",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{    \r\n    \"codigo\": \"EDS3366\",\r\n    \"nombre\": \"abcdefghi\",\r\n    \"direccion\": \"Cra 1 2-3\",\r\n    \"ciudadNombre\": \"Bogotá\",\r\n    \"latitud\": 5.45343,\r\n    \"longitud\": 30.45435,\r\n    \"activa\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/estaciones",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estaciones"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateEstacion",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "admin",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{    \r\n    \"codigo\": \"EDS333\",\r\n    \"nombre\": \"Nueva Estacion PRUEBA UPDATE 8\",\r\n    \"direccion\": \"Cra 86 71A-42\",    \r\n    \"latitud\": 31.334454,\r\n    \"longitud\": -23.44554,\r\n    \"activa\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/estaciones/15",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estaciones",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteEstacion",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "admin",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/estaciones/15",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estaciones",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getEstacionById",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/estaciones/15",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estaciones",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteCache",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "user",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "1234",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/actuator/caches/estaciones",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "actuator",
+            "caches",
+            "estaciones"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

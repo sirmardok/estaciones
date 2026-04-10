@@ -16,7 +16,7 @@ public class EstacionesConfiguration {
 	
 	@Bean
 	public CacheManager cacheManager() {
-	    return new ConcurrentMapCacheManager("estaciones");
+	    return new ConcurrentMapCacheManager("estaciones", "estaciones_lista");
 	}
 
 	 
